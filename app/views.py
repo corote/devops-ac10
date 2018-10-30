@@ -7,6 +7,7 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from app.models import Curso
 from app.models import Vestibular
+from app.models import Candidato
 from datetime import datetime
 
 def home(request):
@@ -72,6 +73,18 @@ def cadastro_vestibulares(request):
     {
         'title':'Cadastro de vestibulares',
         'vestibulares': Vestibular.objects.all( ),
+        'year':datetime.now().year,
+    })
+)
+def cadastro_candidatos(request):
+    assert isinstance(request, HttpRequest) 
+    return render(
+    request,
+    'app/cadastro_candidatos.html',
+    context_instance = RequestContext(request,
+    {
+        'title':'Cadastro de candidatos',
+        'candidatos': Candidato.objects.all( ),
         'year':datetime.now().year,
     })
 )
